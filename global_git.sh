@@ -1,11 +1,13 @@
 #!/bin/bash
-COMMAND=$@
+
+COMMAND="$(printf " %q" "${@}")"
 MODULES=(Crypto P2PMessage P2PMessageSystem HyperledgerJ)
 BASE_DIR=`pwd`
 
-for module in ${MODULES[@]}; do
+for module in "${MODULES[@]}"; do
     cd ../$module
-    git $COMMAND
+    echo `pwd`
+    bash -c "git ${COMMAND}"
     cd $BASE_DIR
 done
 
